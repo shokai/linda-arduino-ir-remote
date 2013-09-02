@@ -20,12 +20,27 @@ EM::run do
     ts.write [:ir_remote, :writables, ArduinoIrRemote::DATA.keys]
 
     ts.watch [:ir_remote, :write] do |tuple|
+      next unless tuple.size == 3
       _,_,cmd = tuple
-      ir_remote.write ArduinoIrRemote::DATA[cmd] if cmd
+      next unless cmd
+      puts "write: #{cmd},#{ArduinoIrRemote::DATA[cmd]}"
+      ir_remote.write ArduinoIrRemote::DATA[cmd]
+      ts.write [:ir_remote, :write, cmd, :finish]
     end
   end
 
   linda.io.on :disconnect do
     puts "RocketIO disconnected.."
+  end
+
+  EM::add_periodic_timer 5 do
+    temp = ir_remote.temp_sensor
+    sensors = 0.upto(5).map{|i|
+      ir_remote.analog_read i
+    }
+    puts "temperature: #{temp}"
+    puts "sensors: #{sensors.inspect}"
+    ts.write [:ir_remote, :temperature, temp]
+    ts.write [:ir_remote, :sensors, sensors]
   end
 end
