@@ -2,8 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.5)
-    arduino_ir_remote (0.1.0)
-      args_parser
+    arduino_ir_remote (0.1.1)
+      args_parser (>= 0.2.0)
       event_emitter
       serialport
     args_parser (0.2.0)
@@ -14,7 +14,7 @@ GEM
       event_emitter (>= 0.2.0)
       eventmachine
       json
-    em-http-request (1.1.0)
+    em-http-request (1.1.1)
       addressable (>= 2.3.4)
       cookiejar
       em-socksify (>= 0.3)
@@ -26,10 +26,11 @@ GEM
       em-websocketio-client
       event_emitter
       eventmachine
-    em-rocketio-linda-client (0.0.3)
+    em-rocketio-linda-client (1.0.0)
       em-rocketio-client
       event_emitter
       eventmachine
+      hashie
     em-socksify (0.3.0)
       eventmachine (>= 1.0.0.beta.4)
     em-websocket-client (0.1.1)
@@ -45,6 +46,7 @@ GEM
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
+    hashie (2.0.5)
     http_parser.rb (0.6.0.beta.2)
     json (1.8.0)
     libwebsocket (0.1.8)
